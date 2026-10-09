@@ -13,4 +13,4 @@ Brookhaven National Laboratory's secure platform for running generative AI model
 
 ## 🚧 The portal will be available soon
 
-For now, you can proceed directly to **[BRAIN Chat](https://chat.brain.bnl.gov/)**.
+For now, you can proceed directly to **[BRAIN Chat](https://chat.brain.bnl.gov/)** (available only on the BNL network or via BNL VPN).
