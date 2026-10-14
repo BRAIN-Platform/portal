@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="User guides and documentation on BRAIN.">
+  <title>User Guides | BRAIN</title>
+
+  <!-- Security meta-tags -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+    img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script src="../assets/js/frame-guard.js"></script>
+
+  <link rel="stylesheet" href="../assets/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="guides-shell">
+      <header class="guides-header">
+        <h1 id="guide-page-title" class="guides-title">User Guides</h1>
+        <p class="guides-intro">
+          Documentation, setup guides, and instructions for interactive chat, tool calling, and API access on BRAIN.
+        </p>
+      </header>
+
+      <section class="panel guides-panel" aria-labelledby="guide-page-title">
+        <div class="table-wrap">
+          <table class="guides-table">
+            <caption class="sr-only">Available user guides</caption>
+            <tbody id="guide-table-body">
+              <tr>
+                <td colspan="3" class="guide-table-loading">Loading user guides…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"></div>
+  </footer>
+
+  <script src="../assets/js/config-loader.js"></script>
+  <script src="assets/js/chrome.js"></script>
+  <script type="module" src="assets/js/index-main.js"></script>
+</body>
+
+</html>

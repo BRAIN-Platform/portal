@@ -1,0 +1,582 @@
+{
+  "benchmarks": [
+    {
+      "description": "Broad general knowledge spanning 57 subjects \u2014 law, medicine, history, STEM and humanities.",
+      "displayName": "MMLU",
+      "file": "mmlu.json",
+      "format": "4-way MCQ (A\u2013D)",
+      "fullName": "Broad General Knowledge (STEM)",
+      "id": "mmlu",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 4000,
+      "summary": [
+        {
+          "avgLatencyMs": 37333.7,
+          "avgScore": 0.93,
+          "n": 500,
+          "passCount": 465,
+          "passRate": 0.93,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 12262.2,
+          "avgScore": 0.918,
+          "n": 500,
+          "passCount": 459,
+          "passRate": 0.918,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 638.3,
+          "avgScore": 0.906,
+          "n": 500,
+          "passCount": 453,
+          "passRate": 0.906,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 2753.2,
+          "avgScore": 0.9,
+          "n": 500,
+          "passCount": 450,
+          "passRate": 0.9,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 11655.3,
+          "avgScore": 0.896,
+          "n": 500,
+          "passCount": 448,
+          "passRate": 0.896,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 1804.3,
+          "avgScore": 0.872,
+          "n": 500,
+          "passCount": 436,
+          "passRate": 0.872,
+          "provider": "gpt-5.4-nano"
+        },
+        {
+          "avgLatencyMs": 49.3,
+          "avgScore": 0.836,
+          "n": 500,
+          "passCount": 418,
+          "passRate": 0.836,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 158.0,
+          "avgScore": 0.792,
+          "n": 500,
+          "passCount": 396,
+          "passRate": 0.792,
+          "provider": "llama-4-scout-17b"
+        }
+      ],
+      "taskCount": 500
+    },
+    {
+      "description": "Crowdsourced science exam questions across physics, chemistry and biology.",
+      "displayName": "SciQ",
+      "file": "sciq.json",
+      "format": "4-way MCQ (A\u2013D)",
+      "fullName": "Science Exam Questions",
+      "id": "sciq",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 8000,
+      "summary": [
+        {
+          "avgLatencyMs": 1237.6,
+          "avgScore": 0.979,
+          "n": 1000,
+          "passCount": 979,
+          "passRate": 0.979,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 3639.3,
+          "avgScore": 0.978,
+          "n": 1000,
+          "passCount": 978,
+          "passRate": 0.978,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 4415.7,
+          "avgScore": 0.974,
+          "n": 1000,
+          "passCount": 974,
+          "passRate": 0.974,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 237.5,
+          "avgScore": 0.971,
+          "n": 1000,
+          "passCount": 971,
+          "passRate": 0.971,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 12863.5,
+          "avgScore": 0.971,
+          "n": 1000,
+          "passCount": 971,
+          "passRate": 0.971,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 100.3,
+          "avgScore": 0.963,
+          "n": 1000,
+          "passCount": 963,
+          "passRate": 0.963,
+          "provider": "llama-4-scout-17b"
+        },
+        {
+          "avgLatencyMs": 47.8,
+          "avgScore": 0.96,
+          "n": 1000,
+          "passCount": 960,
+          "passRate": 0.96,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 1300.1,
+          "avgScore": 0.96,
+          "n": 1000,
+          "passCount": 960,
+          "passRate": 0.96,
+          "provider": "gpt-5.4-nano"
+        }
+      ],
+      "taskCount": 1000
+    },
+    {
+      "description": "Elementary and grade-school science questions that need multi-step reasoning combined with common sense.",
+      "displayName": "OpenBookQA",
+      "file": "openbookqa.json",
+      "format": "4-way MCQ (A\u2013D)",
+      "fullName": "Grade School Science Questions",
+      "id": "openbookqa",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 4000,
+      "summary": [
+        {
+          "avgLatencyMs": 6663.9,
+          "avgScore": 0.968,
+          "n": 500,
+          "passCount": 484,
+          "passRate": 0.968,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 1798.2,
+          "avgScore": 0.966,
+          "n": 500,
+          "passCount": 483,
+          "passRate": 0.966,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 27444.4,
+          "avgScore": 0.96,
+          "n": 500,
+          "passCount": 480,
+          "passRate": 0.96,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 3334.3,
+          "avgScore": 0.954,
+          "n": 500,
+          "passCount": 477,
+          "passRate": 0.954,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 341.5,
+          "avgScore": 0.954,
+          "n": 500,
+          "passCount": 477,
+          "passRate": 0.954,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 49.9,
+          "avgScore": 0.944,
+          "n": 500,
+          "passCount": 472,
+          "passRate": 0.944,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 5377.3,
+          "avgScore": 0.94,
+          "n": 500,
+          "passCount": 470,
+          "passRate": 0.94,
+          "provider": "gpt-5.4-nano"
+        },
+        {
+          "avgLatencyMs": 246.9,
+          "avgScore": 0.93,
+          "n": 500,
+          "passCount": 465,
+          "passRate": 0.93,
+          "provider": "llama-4-scout-17b"
+        }
+      ],
+      "taskCount": 500
+    },
+    {
+      "description": "Reading comprehension over English-exam passages, testing understanding of a given text.",
+      "displayName": "RACE",
+      "file": "race.json",
+      "format": "4-way MCQ (A\u2013D)",
+      "fullName": "Reading and Comprehension",
+      "id": "race",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 4000,
+      "summary": [
+        {
+          "avgLatencyMs": 2990.7,
+          "avgScore": 0.93,
+          "n": 500,
+          "passCount": 465,
+          "passRate": 0.93,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 10430.9,
+          "avgScore": 0.916,
+          "n": 500,
+          "passCount": 458,
+          "passRate": 0.916,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 10542.5,
+          "avgScore": 0.916,
+          "n": 500,
+          "passCount": 458,
+          "passRate": 0.916,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 8504.1,
+          "avgScore": 0.914,
+          "n": 500,
+          "passCount": 457,
+          "passRate": 0.914,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 18416.9,
+          "avgScore": 0.91,
+          "n": 500,
+          "passCount": 455,
+          "passRate": 0.91,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 18258.4,
+          "avgScore": 0.896,
+          "n": 500,
+          "passCount": 448,
+          "passRate": 0.896,
+          "provider": "llama-4-scout-17b"
+        },
+        {
+          "avgLatencyMs": 608.0,
+          "avgScore": 0.868,
+          "n": 500,
+          "passCount": 434,
+          "passRate": 0.868,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 1457.3,
+          "avgScore": 0.868,
+          "n": 500,
+          "passCount": 434,
+          "passRate": 0.868,
+          "provider": "gpt-5.4-nano"
+        }
+      ],
+      "taskCount": 500
+    },
+    {
+      "description": "Linguistic acceptability judgments \u2014 whether a given sentence is grammatically well-formed.",
+      "displayName": "CoLA",
+      "file": "cola.json",
+      "format": "Binary MCQ (A/B)",
+      "fullName": "Linguistic Acceptability Judgments",
+      "id": "cola",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 3984,
+      "summary": [
+        {
+          "avgLatencyMs": 1806.0,
+          "avgScore": 0.8574,
+          "n": 498,
+          "passCount": 427,
+          "passRate": 0.8574,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 17433.1,
+          "avgScore": 0.8534,
+          "n": 498,
+          "passCount": 425,
+          "passRate": 0.8534,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 115.1,
+          "avgScore": 0.8474,
+          "n": 498,
+          "passCount": 422,
+          "passRate": 0.8474,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 8994.9,
+          "avgScore": 0.8313,
+          "n": 498,
+          "passCount": 414,
+          "passRate": 0.8313,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 634.8,
+          "avgScore": 0.8293,
+          "n": 498,
+          "passCount": 413,
+          "passRate": 0.8293,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 1096.2,
+          "avgScore": 0.8193,
+          "n": 498,
+          "passCount": 408,
+          "passRate": 0.8193,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 1329.1,
+          "avgScore": 0.8173,
+          "n": 498,
+          "passCount": 407,
+          "passRate": 0.8173,
+          "provider": "gpt-5.4-nano"
+        },
+        {
+          "avgLatencyMs": 196.3,
+          "avgScore": 0.8032,
+          "n": 498,
+          "passCount": 400,
+          "passRate": 0.8032,
+          "provider": "llama-4-scout-17b"
+        }
+      ],
+      "taskCount": 498
+    },
+    {
+      "description": "Python function completion, graded by executing the generated code against hidden unit tests.",
+      "displayName": "HumanEval",
+      "file": "humaneval.json",
+      "format": "Executed unit tests",
+      "fullName": "Python Function Correctness",
+      "id": "humaneval",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 1312,
+      "summary": [
+        {
+          "avgLatencyMs": 1598.7,
+          "avgScore": 0.9878,
+          "n": 164,
+          "passCount": 162,
+          "passRate": 0.9878,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 7406.4,
+          "avgScore": 0.9817,
+          "n": 164,
+          "passCount": 161,
+          "passRate": 0.9817,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 10088.8,
+          "avgScore": 0.9817,
+          "n": 164,
+          "passCount": 161,
+          "passRate": 0.9817,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 29112.2,
+          "avgScore": 0.9817,
+          "n": 164,
+          "passCount": 161,
+          "passRate": 0.9817,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 43233.6,
+          "avgScore": 0.9756,
+          "n": 164,
+          "passCount": 160,
+          "passRate": 0.9756,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 1532.6,
+          "avgScore": 0.9695,
+          "n": 164,
+          "passCount": 159,
+          "passRate": 0.9695,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 4026.1,
+          "avgScore": 0.9573,
+          "n": 164,
+          "passCount": 157,
+          "passRate": 0.9573,
+          "provider": "gpt-5.4-nano"
+        },
+        {
+          "avgLatencyMs": 1698.9,
+          "avgScore": 0.8293,
+          "n": 164,
+          "passCount": 136,
+          "passRate": 0.8293,
+          "provider": "llama-4-scout-17b"
+        }
+      ],
+      "taskCount": 164
+    },
+    {
+      "description": "Instruction-following compliance \u2014 word counts, formatting rules, keyword inclusion and similar constraints.",
+      "displayName": "IFEval",
+      "file": "ifeval.json",
+      "format": "Verifiable checks (not MCQ)",
+      "fullName": "Instruction Following Compliance",
+      "id": "ifeval",
+      "lastUpdated": "2026-09-11",
+      "providerCount": 8,
+      "rowCount": 4328,
+      "summary": [
+        {
+          "avgLatencyMs": 166619.5,
+          "avgScore": 0.9604,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.963,
+            "ifeval_strict": 0.9578
+          },
+          "passCount": 508,
+          "passRate": 0.939,
+          "provider": "nemotron-3-ultra-550b-a55b"
+        },
+        {
+          "avgLatencyMs": 44749.5,
+          "avgScore": 0.9586,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.964,
+            "ifeval_strict": 0.9532
+          },
+          "passCount": 506,
+          "passRate": 0.9353,
+          "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 2250.4,
+          "avgScore": 0.9321,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9381,
+            "ifeval_strict": 0.9261
+          },
+          "passCount": 481,
+          "passRate": 0.8891,
+          "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 27865.3,
+          "avgScore": 0.9267,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9387,
+            "ifeval_strict": 0.9147
+          },
+          "passCount": 479,
+          "passRate": 0.8854,
+          "provider": "nemotron-3-super-120b"
+        },
+        {
+          "avgLatencyMs": 42567.5,
+          "avgScore": 0.9373,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9538,
+            "ifeval_strict": 0.9208
+          },
+          "passCount": 471,
+          "passRate": 0.8706,
+          "provider": "claude-sonnet-4-6"
+        },
+        {
+          "avgLatencyMs": 3391.3,
+          "avgScore": 0.9114,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9214,
+            "ifeval_strict": 0.9014
+          },
+          "passCount": 459,
+          "passRate": 0.8484,
+          "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 7132.5,
+          "avgScore": 0.9023,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9094,
+            "ifeval_strict": 0.8953
+          },
+          "passCount": 459,
+          "passRate": 0.8484,
+          "provider": "gpt-5.4-nano"
+        },
+        {
+          "avgLatencyMs": 4767.8,
+          "avgScore": 0.9063,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9156,
+            "ifeval_strict": 0.8971
+          },
+          "passCount": 454,
+          "passRate": 0.8392,
+          "provider": "llama-4-scout-17b"
+        }
+      ],
+      "taskCount": 541
+    }
+  ]
+}

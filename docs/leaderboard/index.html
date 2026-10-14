@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LLM benchmark leaderboard — pass rates across every tracked benchmark on BRAIN." />
+  <title>LLM Benchmark Leaderboard | BRAIN</title>
+
+  <!-- Security meta-tags -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+    img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script src="../assets/js/frame-guard.js"></script>
+
+  <link rel="stylesheet" href="../assets/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner"></div>
+  </header>
+
+  <main id="main-content">
+    <div class="shell">
+
+      <h1>LLM Benchmark Leaderboard</h1>
+      <p class="page-intro">
+        Pass rates across every tracked benchmark. Each score links to the full per-task
+        breakdown for that benchmark. "Overall" is the mean of a model's per-benchmark
+        scores, not a pooled average — so a 14,000-question benchmark can't drown out a
+        500-question one.
+      </p>
+
+      <div class="stat-strip" id="stat-strip"></div>
+
+      <p class="section-label">Leaderboard</p>
+      <div class="table-scroll">
+        <table class="matrix" id="matrix">
+          <thead>
+            <tr>
+              <th class="model-col">Model</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="loading-note">Loading benchmark data…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="section-label glossary-label">What each benchmark measures</p>
+      <div class="glossary" id="glossary"></div>
+
+      <div class="page-note">
+        Scores are pass rate per benchmark. Truncated or errored model responses count as
+        failures, not omissions. Data updates as new runs are merged in.
+        <br>
+        This board is a record of evaluations, not a list of what you can call today &mdash; it
+        includes models since retired from BRAIN, and external models evaluated only for
+        comparison. See the <a href="../">platform home page</a> for what is currently available.
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"></div>
+  </footer>
+
+  <script src="../assets/js/config-loader.js"></script>
+  <script src="assets/js/chrome.js"></script>
+  <script type="module" src="assets/js/index-main.js"></script>
+</body>
+
+</html>

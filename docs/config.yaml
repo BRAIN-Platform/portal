@@ -1,0 +1,268 @@
+brand:
+  name: BRAIN
+  tagline: 'Brookhaven Inference Platform'
+  description: 'BRAIN (BRookhAven INference) — language models run on Brookhaven Lab infrastructure.'
+  homeLink: ./
+navigation:
+  items:
+  - token: link-home
+    label: Home
+    name: Home
+    link: ./
+    active: true
+  - token: link-chat
+    label: Chat
+    name: Chat interface
+    link: https://chat.brain.bnl.gov
+    linkTarget: _blank
+  - token: link-api
+    label: API
+    name: API end points
+    link: https://api.brain.bnl.gov
+    linkTarget: _blank
+  - token: link-api-km
+    label: API Key Manager
+    name: API Key Manager
+    link: https://api.brain.bnl.gov/km/
+    linkTarget: _blank
+  # - token: link-agents
+  #   label: Agents & Tools
+  #   name: Agents & tools
+  #   link: agents/
+  - token: link-leaderboard
+    label: Leaderboard
+    name: Model leaderboard
+    link: leaderboard/
+  - token: link-guides
+    label: User Guides
+    name: User guides
+    link: guides/
+  # - token: link-status
+  #   label: Status
+  #   name: System status
+  #   link: status/
+  # signInLink: auth/sign-in
+  # signInIcon: account-circle-outline
+hero:
+  headline: Local LLM Inference for Scientific Discovery
+  summary: Open-weight models served on Brookhaven Lab hardware for both 
+    interactive and programmatic use.
+  actions:
+  - icon: message-text-outline
+    label: Start Chatting
+    link: '{link-chat}'
+  - icon: xml
+    label: API Key Manager
+    link: '{link-api-km}'
+  actionsNote: Chat in your browser, or connect an existing OpenAI-compatible client 
+    to our base URL.
+  accessNote: Available only on the BNL network or via VPN. Sign in with your 
+    Brookhaven Lab account to get started.
+  trustItems:
+  - icon: database-lock-outline
+    label: Prompts and outputs remain on BNL infrastructure — never sent to 
+      external providers.
+about:
+  heading: About BRAIN
+  # {link-chat} and {link-api} are replaced with real links at render time,
+  # using the navigation items' full name ("name") and link destination.
+  intro: BRookhAven INference (BRAIN) is Brookhaven National Laboratory's
+    secure platform for running and integrating generative machine learning
+    models on our own infrastructure. BRAIN provides access to open-weight models
+    through a {link-chat} and an OpenAI-compatible {link-api}, along with
+    published model evaluations and an extensible ecosystem of tools and agents.
+    It is designed to accelerate scientific discovery while keeping data within
+    the lab network. Common uses include searching and summarizing scientific
+    literature, drafting and debugging analysis code, extracting structured data
+    from papers and reports, and summarizing long documents.
+  # Tokens matching navigation items (e.g. {link-chat}) resolve automatically.
+  # For additional inline links that are NOT part of the navigation bar, define
+  # them here:
+  # links:
+  # - token: link-bnl-docs
+  #   name: BNL documentation
+  #   link: https://intranet.bnl.gov/docs
+  models:
+    heading: Available models
+    items:
+    # Grouped by modality, matching the hosted-models table.
+    # `detail` is the provider plus context window in brackets.
+    - group: Text / code
+    # Optional `info` is shown on hover/focus.
+    - name: nemotron-3-ultra-550b
+      detail: NVIDIA (512K context window)
+      info: Highest overall score on our benchmarks, and reasons step by step. 1M-token
+        context window, limited to 512K by available computing resources.
+    - name: nemotron-3-super-120b
+      detail: NVIDIA (up to 1M context window)
+      info: Reasons step by step before answering, which helps on multi-step problems.
+        Efficient to run for a model of its size.
+    - name: gpt-oss-120b
+      detail: OpenAI (up to 131K context window)
+      info: OpenAI's open-weight model. Reasons before answering, with adjustable effort -
+        lower for quick replies, higher for harder problems.
+    - group: Text / code / image analysis
+    - name: muse-glimmer-30b
+      detail: Meta (131K+ context window)
+      info: Understands both text and images, and responds with text or code. Reasons
+        step by step before answering.
+    - name: gemma-4-26b
+      detail: Google (up to 256K context window)
+      info: Understands both text and images, and responds with text or code. Reasoning
+        can be switched on or off, trading depth for speed.
+    - group: Specialized
+    - name: bnl-nemotron-3
+      detail: NVIDIA Nemotron · grounded in SBMS documentation · chat only
+      info: Answers questions about Brookhaven Lab policies and procedures using the
+        lab's Standards Based Management System (SBMS).
+    - group: Image generation
+    - name: FLUX.1 [schnell]
+      detail: Black Forest Labs (up to 512 input tokens) · chat only
+      info: Text-to-image model tuned for fast generation. Describe the image you
+        want in the prompt.
+    - group: Embedding model
+    - name: nomic-embed-text
+      detail: Nomic AI
+      info: Turns text into vectors so documents can be searched by meaning. Used for
+        retrieval and knowledge bases rather than chat.
+    # note: Additional details could be referred in this note.
+  notices:
+    label: Models & open source notices
+    link: notices/models-and-open-source
+userGuides:
+  heading: User Guides
+  allGuides:
+    label: All Guides
+    link: '{link-guides}'
+  entries:
+  - icon: message-text-outline
+    label: Chat Guide
+    description: Using the chat interface
+    link: '{link-guides}/chat'
+  - icon: xml
+    label: API Guide
+    description: Endpoints, auth, and examples
+    link: '{link-guides}/api'
+  - icon: toolbox-outline
+    label: Tool Guide
+    # description: Word and PowerPoint generation examples
+    # link: '{link-guides}/tools'
+    description: Under development
+    disabled: true
+  - icon: robot-outline
+    label: Agents
+    description: Under development
+    disabled: true
+leaderboard:
+  heading: LLM Leaderboard
+  fullLeaderboard:
+    label: Full Leaderboard
+    link: '{link-leaderboard}'
+    # Enable/disable links to benchmark details from the leaderboard page.
+    detailEnabled: false
+  subtitle: Avg Score (%) across 7 benchmarks.
+  dataSource:
+    adapter: json
+    # Written by build_site_data.py; one flat row per model, already ranked.
+    url: '{link-leaderboard}/data/overall.json'
+    method: GET
+    headers: {}
+    responsePath: models
+    timeoutMs: 60000
+    pollIntervalMs: 0
+    fallbackToMock: false
+  vendors:
+    nemotron-3-ultra-550b-a55b: NVIDIA
+    nemotron-3-super-120b: NVIDIA
+    muse-glimmer-30b: Meta
+    llama-4-scout-17b: Meta
+    gpt-oss-120b: OpenAI
+    gpt-5.4-nano: OpenAI
+    gemma-4-26b: Google
+    claude-sonnet-4-6: Anthropic
+  markers:
+  - symbol: "*"
+    providers: ["llama-4-scout-17b"]
+    note: No longer available on BRAIN.
+  - symbol: "#"
+    providers: ["claude-sonnet-4-6", "gpt-5.4-nano"]
+    note: External model, evaluated for comparison only - not served by BRAIN.
+  sorting:
+    defaultColumn: overallPct
+    defaultDirection: desc
+  display:
+    # 0 (or omitted) shows every model in the feed rather than a top-N slice.
+    maxRows: 0
+    modelKey: provider
+    modelLinkKey: link
+    showDevelopmentNotice: false
+    developmentNotice: Showing temporary development data.
+    fallbackNotice: Live rankings are temporarily unavailable. Showing development
+      data.
+    errorMessage: Leaderboard data is temporarily unavailable.
+    emptyMessage: No models are available.
+  columns:
+  - key: rank
+    label: Rank
+    visible: true
+    sortable: false
+    width: 50px
+  - key: provider
+    label: Model
+    visible: true
+    sortable: true
+    width: 215px
+  - key: vendor
+    label: Provider
+    visible: true
+    sortable: true
+    width: 110px
+  - key: overallPct
+    label: Avg Score
+    displayLabel: Avg Score (%)
+    visible: true
+    sortable: true
+    format: decimal
+    decimals: 1
+    info: Mean of the model's per-benchmark pass rates across 7 benchmarks. Each
+      benchmark counts once, so a 1,000-question benchmark does not outweigh a
+      164-question one. Not a pooled accuracy.
+  # Still in the feed, hidden to keep the panel to four columns.
+  # (The full table is on the leaderboard page.)
+  - key: benchmarkCount
+    label: Benchmarks
+    visible: false
+    sortable: true
+    format: integer
+  - key: passCount
+    label: Passed
+    visible: false
+    sortable: true
+    format: integer
+  - key: n
+    label: Questions
+    visible: false
+    sortable: true
+    format: integer
+  # Runs were split between a local machine and an NVIDIA server,
+  # so the timings are not comparable between models.
+  - key: avgLatencyMs
+    label: Avg Latency (ms)
+    visible: false
+    sortable: true
+    format: integer
+footer:
+  securityText: Running securely on local infrastructure
+  links:
+  - label: Privacy and Security Notice
+    link: https://www.bnl.gov/privacy/
+    # linkTarget: _blank
+  - label: Computer Use Policy
+    link: https://www.bnl.gov/cybersecurity/policies/computeruse.php
+    # linkTarget: _blank
+  - label: Artificial Intelligence Policy (internal)
+    link: https://intranet.bnl.gov/itd/ai-policy.php
+    # linkTarget: _blank
+  supportLink: https://brookhavenlab.sharepoint.com/sites/brain-support
+  supportLinkTarget: _blank
+  # copyright: "© {year} BRAIN Platform"

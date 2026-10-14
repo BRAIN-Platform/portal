@@ -1,0 +1,1353 @@
+/* BRAIN Portal – Master Stylesheet
+   Sections:
+      0 Fonts · 1 Tokens · 2 Reset · 3 A11y · 4 Shared utilities
+      5 Layout · 6 Header & nav · 7 Buttons · 8 Hero · 9 About & Models panel
+     10 Resources · 11 Guide · 12 Leaderboard · 13 Table
+     14 Footer · 15 Noscript · 16 Media queries · 17 Reduced-motion
+*/
+
+
+/* 0. Fonts
+   ========================================================================== */
+
+/* Inter variable font — vendored woff2 subsets (latin, latin-ext).
+   Download with: bash docs/assets/fonts/download-inter.sh */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-ext-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+
+/* 1. Design tokens
+   ========================================================================== */
+
+:root {
+  --ink: #111b36;
+  --muted: #596178;
+  --subtle: #7b8296;
+  --line: #e6e8f0;
+  --border: #e3e6ef;
+  --canvas: #fbfcff;
+  --surface: #fff;
+  --primary: #5144dc;
+  --primary-dark: #4033ca;
+  --primary-soft: #f0efff;
+  --blue: #2c76d3;
+  --green: #1ba76b;
+  --amber: #eea629;
+  --shadow: 0 8px 28px rgba(44, 39, 92, 0.08);
+  --page: 1320px;
+}
+
+
+/* 2. Reset & base
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a,
+select,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* 3. Accessibility helpers
+   ========================================================================== */
+
+:focus-visible {
+  outline: 3px solid rgba(81, 68, 220, 0.35);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 9px 14px;
+  border-radius: 6px;
+  color: #fff;
+  background: var(--primary);
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+
+/* 4. Shared utilities (text-link, panel-link, section-icon)
+   ========================================================================== */
+
+/* .text-link is used inside prose (about intro) and as standalone panel links. */
+.text-link {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* .panel-link sits at the bottom of a flex column panel, right-aligned.
+   The arrow is rendered via ::after so label copy in HTML stays clean. */
+.panel-link {
+  display: block;
+  text-align: right;
+  margin-top: auto;
+}
+
+.panel-link::after {
+  content: '\00a0\2192';
+}
+
+/* Used in guide, leaderboard, and about panel headings. */
+.section-icon {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  color: var(--primary);
+  font-size: 23px;
+  line-height: 1;
+}
+
+
+/* 5. Layout containers
+   ========================================================================== */
+
+.header-inner,
+.section-inner,
+.footer-inner {
+  width: min(calc(100% - 48px), var(--page));
+  margin-inline: auto;
+}
+
+
+/* 6. Header & navigation
+   ========================================================================== */
+
+.site-header {
+  height: 80px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .96);
+}
+
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* --- Brand --- */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 238px;
+  text-decoration: none;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-copy strong {
+  font-size: 22px;
+  letter-spacing: -.02em;
+}
+
+.brand-copy small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* --- Primary nav --- */
+
+.primary-nav {
+  flex: 1;
+  height: 100%;
+}
+
+.primary-nav ul {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  gap: clamp(22px, 3vw, 52px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* When the nav is the last flex child (no sign-in item),
+   right-align the links so they visually hug the edge. */
+.primary-nav:last-child ul,
+.primary-nav ul:not(:has(.nav-sign-in)) {
+  justify-content: flex-end;
+}
+
+.primary-nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #161b2c;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+  color: var(--primary);
+}
+
+.primary-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 7px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--primary);
+}
+
+/* --- Mobile nav toggle (hidden on desktop) --- */
+
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  padding: 7px;
+  border: 0;
+  background: transparent;
+}
+
+.nav-toggle span:not(.sr-only) {
+  display: block;
+  width: 23px;
+  height: 2px;
+  margin: 5px;
+  background: var(--ink);
+}
+
+/* --- Sign-in nav item --- */
+
+.nav-sign-in {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-sign-in a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 7px 16px;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--primary), #4a3ee7);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(81, 68, 220, .18);
+  transition: background .18s ease, transform .18s ease;
+}
+
+.nav-sign-in a:hover {
+  background: var(--primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.nav-sign-in a::after {
+  display: none !important;
+}
+
+
+/* 7. Buttons
+   ========================================================================== */
+
+.button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .18s ease;
+}
+
+.button:hover {
+  border-color: #c9c9db;
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  color: #fff;
+  border-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), #4a3ee7);
+  box-shadow: 0 6px 16px rgba(81, 68, 220, .18);
+}
+
+.button-primary:hover {
+  border-color: var(--primary-dark);
+  background: var(--primary-dark);
+}
+
+.button-icon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+
+/* 8. Hero
+   ========================================================================== */
+
+.hero {
+  width: min(calc(100% - 48px), var(--page));
+  min-height: 405px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  align-items: stretch;
+  gap: 42px;
+  padding: 20px 0 18px;
+}
+
+/* Hero copy keeps its vertical centring now that the row stretches. */
+.hero-copy {
+  align-self: center;
+  padding-left: 2px;
+}
+
+.hero h1 {
+  max-width: 550px;
+  margin: 0;
+  font-size: clamp(40px, 4vw, 55px);
+  line-height: .99;
+  letter-spacing: -.045em;
+  font-weight: 780;
+}
+
+.hero h1 .accent {
+  color: var(--primary);
+}
+
+.hero-summary {
+  max-width: 550px;
+  margin: 22px 0 23px;
+  color: #323a50;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 17px;
+  max-width: 550px;
+}
+
+.hero-actions .button {
+  flex: 1;
+}
+
+/* --- Hero notes (under CTA buttons) --- */
+
+.hero-actions-note {
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.72;
+  margin: 14px 0 0;
+  max-width: 550px;
+}
+
+/* Access precondition callout — not a footnote; users cannot reach the service
+   without satisfying it, so it is called out rather than greyed down. */
+.hero-access-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #8a5d0a;
+  background: #fdf3e4;
+  border: 1px solid #f2dcb5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 14px 0 0;
+  max-width: 550px;
+}
+
+.hero-access-note .mdi {
+  font-size: 16px;
+  line-height: 1.3;
+  opacity: 0.85;
+  flex: none;
+}
+
+/* --- Trust list (single security statement) --- */
+
+.trust-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trust-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #31384c;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.82;
+  line-height: 1.5;
+}
+
+.trust-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+}
+
+
+/* 9. About & Models panel (hero, right column)
+   ========================================================================== */
+
+.about-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.about-header h2 {
+  font-size: 17px;
+  line-height: 1;
+  margin: 0;
+}
+
+.about-intro {
+  font-size: 16px;
+  line-height: 1.62;
+  opacity: 0.8;
+  margin: 0 0 14px;
+  text-align: justify;
+}
+
+/* Inline links inside the intro prose inherit body size, not the .text-link
+   default of 12px. */
+.about-intro .text-link {
+  font-size: inherit;
+}
+
+.about-intro:last-of-type {
+  margin-bottom: 16px;
+}
+
+.about-subhead {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 16px 0 8px;
+}
+
+/* --- Model groups (two-column layout via JS bin-packing) --- */
+
+/* JS assigns each group to a .models-col div; CSS just makes the two
+   columns sit side by side. column-gap keeps the 26px gutter. */
+.models-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 26px;
+  align-items: start;
+}
+
+.models-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.model-group-block {
+  margin-bottom: 14px;
+}
+
+.model-group-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+/* One colour per group, so the four are told apart at a glance. */
+.model-group-text-code {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.model-group-text-code-image-analysis {
+  background: #e8f6ef;
+  color: #12805a;
+}
+
+.model-group-image-generation {
+  background: #fdf2e3;
+  color: #97660c;
+}
+
+.model-group-specialized {
+  background: #e7f0fc;
+  color: #1f5aa8;
+}
+
+.model-group-embedding-model {
+  background: #e7f3f2;
+  color: #12706c;
+}
+
+.models-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.model-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.model-item:last-child {
+  border-bottom: none;
+}
+
+.models-grid .model-item {
+  border-bottom: none;
+  padding: 4px 0;
+}
+
+.model-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.model-copy strong {
+  font-weight: 600;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.model-detail {
+  font-size: 13px;
+  opacity: 0.62;
+}
+
+/* Reasoning vs fast: a quiet latency label, not a badge competing with the
+   model name. */
+.model-name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.model-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 1px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.model-tag-reasoning {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.model-tag-fast {
+  background: #e8f6ef;
+  color: #12805a;
+}
+
+.models-note {
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.62;
+  margin: 12px 0 0;
+}
+
+/* No note under the models list any more; do not leave its margin behind. */
+.models-note:empty {
+  display: none;
+}
+
+/* --- Model hover tooltip --- */
+
+.model-item.has-info,
+th.has-info {
+  position: relative;
+}
+
+.model-info {
+  cursor: help;
+  outline: none;
+}
+
+.model-info-icon {
+  font-size: 0.85em;
+  margin-left: 5px;
+  opacity: 0.45;
+  vertical-align: 1px;
+}
+
+.model-info:hover .model-info-icon,
+.model-info:focus-visible .model-info-icon {
+  opacity: 0.85;
+  color: var(--primary);
+}
+
+.model-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  z-index: 20;
+  width: max-content;
+  max-width: min(520px, 90vw);
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: #1f2433;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.45;
+  white-space: normal;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(17, 27, 54, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-3px);
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+  pointer-events: none;
+}
+
+.model-info:hover .model-tooltip,
+.model-info:focus-visible .model-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Tooltips in the right-hand column or trailing table header anchor to the right
+   edge and open leftwards, otherwise a wide tooltip would run past the panel. */
+.models-col:last-child .model-tooltip,
+th:last-child .model-tooltip {
+  left: auto;
+  right: 0;
+}
+
+
+/* 10. Resources section layout & panels
+   ========================================================================== */
+
+.resources-section {
+  background: #fff;
+}
+
+.resources-grid {
+  display: grid;
+  /* Same split and gap as .hero, so the leaderboard panel lines up with the
+     About panel above it rather than starting further left. */
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  gap: 42px;
+  padding: 12px 0 11px;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1;
+}
+
+
+/* 11. Guide panel
+   ========================================================================== */
+
+.guide-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 22px 10px;
+}
+
+.guide-list {
+  flex: 1;
+  margin: 6px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-item>a,
+.guide-item>span {
+  display: grid;
+  grid-template-columns: 28px 1fr 14px;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.guide-item>a:hover {
+  background: #fafaff;
+}
+
+.guide-icon {
+  color: var(--blue);
+  font-size: 18px;
+  text-align: center;
+}
+
+.guide-copy {
+  min-width: 0;
+}
+
+.guide-copy strong,
+.guide-copy span {
+  display: block;
+}
+
+.guide-copy strong {
+  font-size: 13px;
+}
+
+.guide-copy span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.guide-arrow {
+  color: var(--muted);
+  font-size: 20px;
+}
+
+/* Entries for things that do not exist yet — shown, but not linked. */
+.guide-item-disabled>span {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.guide-item-disabled .guide-arrow {
+  display: none;
+}
+
+
+/* 12. Leaderboard panel
+   ========================================================================== */
+
+.leaderboard-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 11px 22px 10px;
+}
+
+.leaderboard-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 9px;
+}
+
+.panel-subtitle {
+  margin: 2px 0 0 38px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.leaderboard-notice {
+  min-height: 0;
+  color: #8a5700;
+  font-size: 11px;
+}
+
+.leaderboard-notice:not(:empty) {
+  margin: 0 0 5px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: #fff7e6;
+}
+
+/* Panel leaderboard shows the top few and scrolls to the rest; every model is
+   still in the DOM, so sorting and the legend stay correct. */
+.leaderboard-panel .table-wrap {
+  /* flex: 1 fills available panel height, eliminating the empty gap at the
+     bottom when both panels stretch to the same grid row height. */
+  flex: 1;
+  overflow-y: auto;
+}
+
+.leaderboard-panel .table-wrap thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+/* --- Availability markers --- */
+
+.model-marker {
+  margin-left: 3px;
+  font-weight: 700;
+  opacity: 0.65;
+  cursor: help;
+}
+
+.leaderboard-legend {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11px;
+  opacity: 0.68;
+}
+
+.leaderboard-legend .legend-symbol {
+  font-weight: 700;
+  display: inline-block;
+  min-width: 10px;
+}
+
+
+/* 13. Table (leaderboard)
+   ========================================================================== */
+
+.table-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+th,
+td {
+  height: 30px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #ebedf3;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  height: 36px;
+  color: #3d4354;
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+th button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  text-align: left;
+}
+
+th button:hover {
+  color: var(--primary);
+}
+
+.col-info-icon {
+  margin-left: 3px;
+  font-size: 12px;
+  color: var(--subtle);
+  cursor: help;
+  vertical-align: middle;
+}
+
+td {
+  color: #31384b;
+  font-weight: 600;
+}
+
+.model-link {
+  color: var(--primary);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.model-link:hover {
+  text-decoration: underline;
+}
+
+.metadata-badge {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  font-size: 10px;
+}
+
+.rank-icon {
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  color: var(--muted);
+}
+
+.rank-1 {
+  color: #d4a017;
+}
+
+.rank-2 {
+  color: #8a8a8a;
+}
+
+.rank-3 {
+  color: #b87333;
+}
+
+.empty-row td {
+  height: 74px;
+  color: var(--muted);
+  text-align: center;
+}
+
+
+/* 14. Footer
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+
+.footer-inner {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 1.4fr 2fr 1.1fr auto;
+  align-items: center;
+  gap: 22px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.support-note {
+  text-align: right;
+}
+
+#copyright {
+  justify-self: end;
+  text-align: right;
+}
+
+.footer-bottom {
+  display: contents;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.security-note span:first-child {
+  color: var(--ink);
+  font-size: 24px;
+}
+
+.footer-inner nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-inner a {
+  text-decoration: none;
+}
+
+.footer-inner a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.support-note a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+
+/* 15. Noscript fallback
+   ========================================================================== */
+
+.noscript {
+  padding: 16px;
+  color: #7a2100;
+  background: #fff1eb;
+  text-align: center;
+}
+
+
+/* 16. Media queries (responsive)
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .brand {
+    min-width: 190px;
+  }
+
+  .primary-nav ul {
+    gap: 20px;
+  }
+
+  .primary-nav a {
+    font-size: 13px;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);
+    gap: 24px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .trust-list {
+    gap: 16px;
+  }
+
+  .resources-grid {
+    grid-template-columns: 285px 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    height: 68px;
+  }
+
+  .header-inner {
+    width: min(calc(100% - 32px), var(--page));
+  }
+
+  .brand {
+    min-width: 0;
+    margin-right: auto;
+  }
+
+  .brand-copy strong {
+    font-size: 19px;
+  }
+
+  .brand-copy small {
+    font-size: 10px;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .primary-nav {
+    position: absolute;
+    z-index: 20;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--shadow);
+    transition: max-height .25s ease;
+  }
+
+  .primary-nav.open {
+    max-height: 420px;
+  }
+
+  .primary-nav ul {
+    height: auto;
+    display: block;
+    padding: 8px 16px 14px;
+  }
+
+  .primary-nav a {
+    height: 44px;
+    padding: 0 10px;
+  }
+
+  .primary-nav a[aria-current="page"]::after {
+    inset: auto auto 5px 10px;
+    width: 30px;
+  }
+
+  .nav-sign-in a {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+
+  .hero {
+    width: min(calc(100% - 32px), var(--page));
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-block: 46px;
+  }
+
+  .hero-copy {
+    max-width: 680px;
+  }
+
+  .section-inner {
+    width: min(calc(100% - 32px), var(--page));
+  }
+
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-panel {
+    padding: 18px 22px;
+  }
+
+  .guide-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 20px;
+  }
+
+  .footer-inner {
+    width: min(calc(100% - 32px), var(--page));
+    grid-template-columns: 1fr 1fr;
+    padding: 18px 0;
+  }
+
+  .footer-inner nav ul {
+    justify-content: flex-end;
+    gap: 24px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-column: 1 / -1;
+  }
+
+  .support-note {
+    text-align: left;
+  }
+
+  #copyright {
+    text-align: right;
+    justify-self: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    width: min(calc(100% - 32px), var(--page));
+    padding: 36px 0;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero-summary {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .trust-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 26px;
+  }
+
+  .guide-list {
+    grid-template-columns: 1fr;
+  }
+
+  th,
+  td {
+    padding-inline: 10px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .footer-inner nav ul {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+  }
+
+  .footer-bottom {
+    width: 100%;
+    gap: 12px;
+  }
+
+  #copyright {
+    text-align: right;
+  }
+}
+
+
+/* 17. Reduced-motion preference
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}

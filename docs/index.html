@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title></title>
+
+  <!-- Security meta-tags -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+    img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script src="assets/js/frame-guard.js"></script>
+
+  <link rel="stylesheet" href="assets/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/config-loader.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner"></div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title"></h1>
+        <p id="hero-summary" class="hero-summary"></p>
+        <div id="hero-actions" class="hero-actions"></div>
+        <p id="hero-actions-note" class="hero-actions-note"></p>
+        <p class="hero-access-note">
+          <span class="mdi mdi-shield-lock-outline" aria-hidden="true"></span>
+          <!-- id is on the inner span (JS target), not on the wrapper <p> (CSS target) -->
+          <span id="hero-access-note-text"></span>
+        </p>
+        <ul id="trust-list" class="trust-list" aria-label="Platform benefits"></ul>
+      </div>
+
+      <section class="about-panel" aria-labelledby="about-title">
+        <header class="about-header">
+          <span class="section-icon mdi mdi-layers-outline" aria-hidden="true"></span>
+          <h2 id="about-title"></h2>
+        </header>
+        <p id="about-intro" class="about-intro"></p>
+        <h3 id="models-heading" class="about-subhead"></h3>
+        <div id="models-list" class="models-grid"></div>
+        <p id="models-note" class="models-note"></p>
+        <a id="notices-link" class="text-link panel-link"></a>
+      </section>
+    </section>
+
+
+    <section class="resources-section" aria-label="Documentation and model benchmarks">
+      <div class="section-inner resources-grid">
+        <section class="panel guide-panel" aria-labelledby="guide-title">
+          <div class="panel-heading">
+            <span class="section-icon mdi mdi-book-open-page-variant-outline" aria-hidden="true"></span>
+            <h2 id="guide-title"></h2>
+          </div>
+          <ul id="guide-list" class="guide-list"></ul>
+          <a id="all-guides-link" class="text-link panel-link"></a>
+        </section>
+
+        <section class="panel leaderboard-panel" aria-labelledby="leaderboard-title">
+          <div class="leaderboard-topline">
+            <div class="panel-heading">
+              <span class="section-icon mdi mdi-trophy-outline" aria-hidden="true"></span>
+              <h2 id="leaderboard-title"></h2>
+            </div>
+            <p id="leaderboard-subtitle" class="panel-subtitle"></p>
+          </div>
+
+          <div id="leaderboard-notice" class="leaderboard-notice" role="status" aria-live="polite"></div>
+          <div class="table-wrap" tabindex="0" aria-label="Scrollable leaderboard table">
+            <table>
+              <caption class="sr-only">Model benchmark rankings</caption>
+              <thead>
+                <tr id="leaderboard-head"></tr>
+              </thead>
+              <tbody id="leaderboard-body"></tbody>
+            </table>
+          </div>
+          <ul id="leaderboard-legend" class="leaderboard-legend"></ul>
+          <a id="full-leaderboard-link" class="text-link panel-link"></a>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner"></div>
+  </footer>
+
+  <noscript>
+    <p class="noscript">JavaScript is required to load this page's YAML configuration.</p>
+  </noscript>
+</body>
+
+</html>
