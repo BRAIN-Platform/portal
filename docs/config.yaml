@@ -15,11 +15,11 @@ navigation:
     name: Chat interface
     link: https://chat.brain.bnl.gov
     linkTarget: _blank
-  - token: link-api
-    label: API
-    name: API end points
-    link: https://api.brain.bnl.gov
-    linkTarget: _blank
+  # - token: link-api
+  #   label: API
+  #   name: API end points
+  #   link: https://api.brain.bnl.gov
+  #   linkTarget: _blank
   - token: link-api-km
     label: API Key Manager
     name: API Key Manager
@@ -64,12 +64,12 @@ hero:
       external providers.
 about:
   heading: About BRAIN
-  # {link-chat} and {link-api} are replaced with real links at render time,
+  # {link-chat} is replaced with real links at render time,
   # using the navigation items' full name ("name") and link destination.
   intro: BRookhAven INference (BRAIN) is Brookhaven National Laboratory's
     secure platform for running and integrating generative machine learning
     models on our own infrastructure. BRAIN provides access to open-weight models
-    through a {link-chat} and an OpenAI-compatible {link-api}, along with
+    through a {link-chat} and an OpenAI-compatible API end points, along with
     published model evaluations and an extensible ecosystem of tools and agents.
     It is designed to accelerate scientific discovery while keeping data within
     the lab network. Common uses include searching and summarizing scientific
