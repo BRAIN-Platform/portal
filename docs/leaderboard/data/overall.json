@@ -1,6 +1,16 @@
 {
-  "lastUpdated": "2026-09-11",
+  "lastUpdated": "2026-11-05",
   "models": [
+    {
+      "avgLatencyMs": 3956.6,
+      "benchmarkCount": 7,
+      "n": 3703,
+      "overall": 0.9482,
+      "overallPct": 94.8,
+      "passCount": 3514,
+      "provider": "muse-spark-open",
+      "rank": 1
+    },
     {
       "avgLatencyMs": 42683.8,
       "benchmarkCount": 7,
@@ -9,7 +19,7 @@
       "overallPct": 93.5,
       "passCount": 3465,
       "provider": "nemotron-3-ultra-550b-a55b",
-      "rank": 1
+      "rank": 2
     },
     {
       "avgLatencyMs": 14751.8,
@@ -19,7 +29,7 @@
       "overallPct": 92.8,
       "passCount": 3444,
       "provider": "muse-glimmer-30b",
-      "rank": 2
+      "rank": 3
     },
     {
       "avgLatencyMs": 9117.3,
@@ -29,7 +39,7 @@
       "overallPct": 92.5,
       "passCount": 3429,
       "provider": "claude-sonnet-4-6",
-      "rank": 3
+      "rank": 4
     },
     {
       "avgLatencyMs": 8187.7,
@@ -39,7 +49,17 @@
       "overallPct": 92.4,
       "passCount": 3427,
       "provider": "nemotron-3-super-120b",
-      "rank": 4
+      "rank": 5
+    },
+    {
+      "avgLatencyMs": 2525.8,
+      "benchmarkCount": 7,
+      "n": 3703,
+      "overall": 0.9204,
+      "overallPct": 92.0,
+      "passCount": 3419,
+      "provider": "nemotron-3.5-lightning",
+      "rank": 6
     },
     {
       "avgLatencyMs": 930.2,
@@ -49,7 +69,7 @@
       "overallPct": 90.9,
       "passCount": 3369,
       "provider": "gpt-oss-120b",
-      "rank": 5
+      "rank": 7
     },
     {
       "avgLatencyMs": 1586.7,
@@ -59,7 +79,7 @@
       "overallPct": 90.9,
       "passCount": 3369,
       "provider": "gemma-4-26b",
-      "rank": 6
+      "rank": 8
     },
     {
       "avgLatencyMs": 2916.7,
@@ -69,7 +89,7 @@
       "overallPct": 89.5,
       "passCount": 3323,
       "provider": "gpt-5.4-nano",
-      "rank": 7
+      "rank": 9
     },
     {
       "avgLatencyMs": 3345.3,
@@ -79,7 +99,7 @@
       "overallPct": 86.5,
       "passCount": 3262,
       "provider": "llama-4-scout-17b",
-      "rank": 8
+      "rank": 10
     }
   ]
 }
