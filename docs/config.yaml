@@ -174,7 +174,9 @@ leaderboard:
   vendors:
     nemotron-3-ultra-550b-a55b: NVIDIA
     nemotron-3-super-120b: NVIDIA
+    nemotron-3.5-lightning: NVIDIA
     muse-glimmer-30b: Meta
+    muse-spark-open: Meta
     llama-4-scout-17b: Meta
     gpt-oss-120b: OpenAI
     gpt-5.4-nano: OpenAI
@@ -192,7 +194,7 @@ leaderboard:
     defaultDirection: desc
   display:
     # 0 (or omitted) shows every model in the feed rather than a top-N slice.
-    maxRows: 0
+    maxRows: 7
     modelKey: provider
     modelLinkKey: link
     showDevelopmentNotice: false

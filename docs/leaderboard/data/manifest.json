@@ -7,10 +7,18 @@
       "format": "4-way MCQ (A\u2013D)",
       "fullName": "Broad General Knowledge (STEM)",
       "id": "mmlu",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 4000,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 5000,
       "summary": [
+        {
+          "avgLatencyMs": 3212.9,
+          "avgScore": 0.938,
+          "n": 500,
+          "passCount": 469,
+          "passRate": 0.938,
+          "provider": "muse-spark-open"
+        },
         {
           "avgLatencyMs": 37333.7,
           "avgScore": 0.93,
@@ -52,6 +60,14 @@
           "provider": "muse-glimmer-30b"
         },
         {
+          "avgLatencyMs": 2432.9,
+          "avgScore": 0.88,
+          "n": 500,
+          "passCount": 440,
+          "passRate": 0.88,
+          "provider": "nemotron-3.5-lightning"
+        },
+        {
           "avgLatencyMs": 1804.3,
           "avgScore": 0.872,
           "n": 500,
@@ -85,10 +101,18 @@
       "format": "4-way MCQ (A\u2013D)",
       "fullName": "Science Exam Questions",
       "id": "sciq",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 8000,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 10000,
       "summary": [
+        {
+          "avgLatencyMs": 1209.5,
+          "avgScore": 0.98,
+          "n": 1000,
+          "passCount": 980,
+          "passRate": 0.98,
+          "provider": "muse-spark-open"
+        },
         {
           "avgLatencyMs": 1237.6,
           "avgScore": 0.979,
@@ -130,6 +154,14 @@
           "provider": "nemotron-3-ultra-550b-a55b"
         },
         {
+          "avgLatencyMs": 769.7,
+          "avgScore": 0.971,
+          "n": 1000,
+          "passCount": 971,
+          "passRate": 0.971,
+          "provider": "nemotron-3.5-lightning"
+        },
+        {
           "avgLatencyMs": 100.3,
           "avgScore": 0.963,
           "n": 1000,
@@ -163,10 +195,18 @@
       "format": "4-way MCQ (A\u2013D)",
       "fullName": "Grade School Science Questions",
       "id": "openbookqa",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 4000,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 5000,
       "summary": [
+        {
+          "avgLatencyMs": 1286.0,
+          "avgScore": 0.98,
+          "n": 500,
+          "passCount": 490,
+          "passRate": 0.98,
+          "provider": "muse-spark-open"
+        },
         {
           "avgLatencyMs": 6663.9,
           "avgScore": 0.968,
@@ -174,6 +214,14 @@
           "passCount": 484,
           "passRate": 0.968,
           "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 1250.4,
+          "avgScore": 0.968,
+          "n": 500,
+          "passCount": 484,
+          "passRate": 0.968,
+          "provider": "nemotron-3.5-lightning"
         },
         {
           "avgLatencyMs": 1798.2,
@@ -241,10 +289,18 @@
       "format": "4-way MCQ (A\u2013D)",
       "fullName": "Reading and Comprehension",
       "id": "race",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 4000,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 5000,
       "summary": [
+        {
+          "avgLatencyMs": 2236.9,
+          "avgScore": 0.954,
+          "n": 500,
+          "passCount": 477,
+          "passRate": 0.954,
+          "provider": "muse-spark-open"
+        },
         {
           "avgLatencyMs": 2990.7,
           "avgScore": 0.93,
@@ -286,6 +342,14 @@
           "provider": "nemotron-3-ultra-550b-a55b"
         },
         {
+          "avgLatencyMs": 2194.4,
+          "avgScore": 0.904,
+          "n": 500,
+          "passCount": 452,
+          "passRate": 0.904,
+          "provider": "nemotron-3.5-lightning"
+        },
+        {
           "avgLatencyMs": 18258.4,
           "avgScore": 0.896,
           "n": 500,
@@ -319,9 +383,9 @@
       "format": "Binary MCQ (A/B)",
       "fullName": "Linguistic Acceptability Judgments",
       "id": "cola",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 3984,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 4980,
       "summary": [
         {
           "avgLatencyMs": 1806.0,
@@ -346,6 +410,22 @@
           "passCount": 422,
           "passRate": 0.8474,
           "provider": "gemma-4-26b"
+        },
+        {
+          "avgLatencyMs": 4975.1,
+          "avgScore": 0.8454,
+          "n": 498,
+          "passCount": 421,
+          "passRate": 0.8454,
+          "provider": "muse-spark-open"
+        },
+        {
+          "avgLatencyMs": 1451.5,
+          "avgScore": 0.8414,
+          "n": 498,
+          "passCount": 419,
+          "passRate": 0.8414,
+          "provider": "nemotron-3.5-lightning"
         },
         {
           "avgLatencyMs": 8994.9,
@@ -397,9 +477,9 @@
       "format": "Executed unit tests",
       "fullName": "Python Function Correctness",
       "id": "humaneval",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 1312,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 1640,
       "summary": [
         {
           "avgLatencyMs": 1598.7,
@@ -408,6 +488,14 @@
           "passCount": 162,
           "passRate": 0.9878,
           "provider": "gpt-oss-120b"
+        },
+        {
+          "avgLatencyMs": 7284.5,
+          "avgScore": 0.9878,
+          "n": 164,
+          "passCount": 162,
+          "passRate": 0.9878,
+          "provider": "muse-spark-open"
         },
         {
           "avgLatencyMs": 7406.4,
@@ -450,6 +538,14 @@
           "provider": "gemma-4-26b"
         },
         {
+          "avgLatencyMs": 5417.8,
+          "avgScore": 0.9634,
+          "n": 164,
+          "passCount": 158,
+          "passRate": 0.9634,
+          "provider": "nemotron-3.5-lightning"
+        },
+        {
           "avgLatencyMs": 4026.1,
           "avgScore": 0.9573,
           "n": 164,
@@ -475,10 +571,22 @@
       "format": "Verifiable checks (not MCQ)",
       "fullName": "Instruction Following Compliance",
       "id": "ifeval",
-      "lastUpdated": "2026-09-11",
-      "providerCount": 8,
-      "rowCount": 4328,
+      "lastUpdated": "2026-11-05",
+      "providerCount": 10,
+      "rowCount": 5410,
       "summary": [
+        {
+          "avgLatencyMs": 11833.3,
+          "avgScore": 0.9717,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9732,
+            "ifeval_strict": 0.9701
+          },
+          "passCount": 515,
+          "passRate": 0.9519,
+          "provider": "muse-spark-open"
+        },
         {
           "avgLatencyMs": 166619.5,
           "avgScore": 0.9604,
@@ -502,6 +610,18 @@
           "passCount": 506,
           "passRate": 0.9353,
           "provider": "muse-glimmer-30b"
+        },
+        {
+          "avgLatencyMs": 7455.0,
+          "avgScore": 0.9486,
+          "n": 541,
+          "namedScoreAvgs": {
+            "ifeval_loose": 0.9556,
+            "ifeval_strict": 0.9415
+          },
+          "passCount": 495,
+          "passRate": 0.915,
+          "provider": "nemotron-3.5-lightning"
         },
         {
           "avgLatencyMs": 2250.4,
