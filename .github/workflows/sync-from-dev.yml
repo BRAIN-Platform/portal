@@ -1,0 +1,154 @@
+# ==============================================================================
+# Scans the private BRAIN development repositories configured in 
+# `scripts/sync-settings.yml` for changes on their configured branches,
+# syncs them into `portal`, and opens or updates a Pull Request.
+#
+# Required repository configuration in `BRAIN-Platform/portal`:
+#   1. Secret `BRAIN_DEV_REPO_TOKEN`: Fine-grained PAT (or GitHub App token) in
+#      `BRAIN-Platform` with `Contents: Read-only` access to dev repos.
+#   2. Settings -> Actions -> General -> Workflow permissions:
+#        - Select "Read and write permissions"
+#        - Enable "Allow GitHub Actions to create and approve pull requests"
+#      (Or provide an optional `BRAIN_PORTAL_PR_TOKEN` secret with
+#      `Contents: Write` and `Pull requests: Write` on `BRAIN-Platform/portal`.
+#      PRs opened with the default `GITHUB_TOKEN` do not trigger other
+#      workflows, so use `BRAIN_PORTAL_PR_TOKEN` if `main` requires checks.)
+# ==============================================================================
+
+name: Sync Portal
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: "Component to sync"
+        required: true
+        type: choice
+        default: "all"
+        options:
+          - all
+          - homepage
+          - leaderboard
+          - guides
+      dry_run:
+        description: "Preview changes in workflow summary without opening a PR"
+        required: false
+        type: boolean
+        default: false
+
+  repository_dispatch:
+    types: [sync-portal]
+
+  schedule:
+    # Daily scan at 06:00 UTC as a fallback if manual/webhook triggers are skipped
+    - cron: "0 6 * * *"
+
+concurrency:
+  group: portal-docs-sync-${{ github.event.client_payload.component || inputs.component || 'all' }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Sync components
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portal repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Verify yq is available
+        run: |
+          if ! command -v yq >/dev/null 2>&1 || ! yq --version 2>&1 | grep -qi 'mikefarah'; then
+            echo "::error::mikefarah/yq is required (preinstalled on ubuntu-latest). See https://github.com/mikefarah/yq"
+            exit 1
+          fi
+          yq --version
+
+      - name: Resolve sync parameters
+        id: params
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_COMPONENT: ${{ inputs.component }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          DISPATCH_COMPONENT: ${{ github.event.client_payload.component }}
+        run: |
+          comp="all"
+          dry_run="false"
+
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            comp="${INPUT_COMPONENT:-all}"
+            dry_run="${INPUT_DRY_RUN:-false}"
+          elif [[ "$EVENT_NAME" == "repository_dispatch" ]]; then
+            comp="${DISPATCH_COMPONENT:-all}"
+          fi
+
+          # Accept only `all` or a configured alias, so the PR branch name and
+          # $GITHUB_OUTPUT cannot be shaped by arbitrary payload values.
+          if [[ "$comp" != "all" ]] && ! COMP="$comp" yq -e \
+              '.sources[] | select(.alias == strenv(COMP))' ./scripts/sync-settings.yml >/dev/null; then
+            echo "::error::Unknown component '${comp}' (expected 'all' or a sources[].alias in scripts/sync-settings.yml)."
+            exit 1
+          fi
+
+          if [[ "$comp" == "all" ]]; then
+            pr_branch="$(yq -r '.target.pr_branch // "sync/dev-repos"' ./scripts/sync-settings.yml)"
+          else
+            pr_branch="sync/${comp}"
+          fi
+
+          {
+            echo "component=${comp}"
+            echo "dry_run=${dry_run}"
+            echo "pr_branch=${pr_branch}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run portal sync script
+        id: run_sync
+        env:
+          BRAIN_DEV_REPO_TOKEN: ${{ secrets.BRAIN_DEV_REPO_TOKEN }}
+          SYNC_COMPONENT: ${{ steps.params.outputs.component }}
+          SYNC_DRY_RUN: ${{ steps.params.outputs.dry_run }}
+        run: |
+          if [[ -z "${BRAIN_DEV_REPO_TOKEN:-}" ]]; then
+            echo "::error::Missing BRAIN_DEV_REPO_TOKEN secret. Configure a Fine-Grained PAT with Contents:Read on dev repositories."
+            exit 1
+          fi
+
+          args=(
+            --config ./scripts/sync-settings.yml
+            --source remote
+            --component "$SYNC_COMPONENT"
+            --report-file "${RUNNER_TEMP}/sync-report.md"
+            --title-file "${RUNNER_TEMP}/sync-title.txt"
+            --sync-path-file "${RUNNER_TEMP}/sync-path.txt"
+          )
+          if [[ "$SYNC_DRY_RUN" == "true" ]]; then
+            args+=(--dry-run)
+          fi
+
+          ./scripts/sync-portal.sh "${args[@]}"
+
+          cat "${RUNNER_TEMP}/sync-report.md" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "commit_title=$(cat "${RUNNER_TEMP}/sync-title.txt")"
+            echo "sync_path=$(cat "${RUNNER_TEMP}/sync-path.txt")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create or update Pull Request
+        if: steps.params.outputs.dry_run != 'true'
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.BRAIN_PORTAL_PR_TOKEN || secrets.GITHUB_TOKEN }}
+          add-paths: ${{ steps.run_sync.outputs.sync_path }}
+          branch: ${{ steps.params.outputs.pr_branch }}
+          delete-branch: true
+          commit-message: ${{ steps.run_sync.outputs.commit_title }}
+          title: ${{ steps.run_sync.outputs.commit_title }}
+          body-path: ${{ runner.temp }}/sync-report.md
+

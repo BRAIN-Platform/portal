@@ -1,0 +1,52 @@
+# ==============================================================================
+# sync-settings.yml — Configuration for `scripts/sync-portal.sh`
+#
+# Defines the target repository (`target`) and the source development
+# repositories (`sources`) to scan and synchronize. Loaded automatically by
+# `sync-portal.sh` when `--config` is not passed on the command line.
+#
+# Note on directory paths (`sync_dir`, `source_dir`, `target_dir`):
+#   - Use `"docs/"` (or `"docs/<subdir>/"`) when syncing only the `docs/` tree.
+#   - Every `target_dir` must be inside `target.sync_dir`. Other components'
+#     `target_dir`s nested inside a component's `target_dir` are automatically
+#     protected from that component's `rsync --delete`.
+#   - `"/"` syncs an entire repository root, but `rsync --delete` then removes
+#     every target-owned root file the source lacks: add `excludes` for them
+#     (e.g. `/.github`, `/scripts`, `/LICENSE*`, `/NOTICE`, `/docs/CNAME`).
+#   - `excludes` must be YAML lists of rsync patterns (relative to `target_dir`).
+#     `target.excludes` applies globally across all sources; `sources[].excludes`
+#     is optional and component-specific.
+# ==============================================================================
+
+target:
+  repo: "BRAIN-Platform/portal"
+  branch: "main"
+  pr_branch: "sync/dev-repos"
+  sync_dir: "docs/"
+  excludes:
+    - ".DS_Store"
+
+sources:
+  - alias: "homepage"
+    repo: "BRAIN-Platform/brain-portal-landing"
+    local_path: "../brain-portal-landing"
+    branch: "main"
+    source_dir: "docs/"
+    target_dir: "docs/"
+    excludes:
+      - "/CNAME"
+
+  - alias: "leaderboard"
+    repo: "BRAIN-Platform/brain-leaderboard"
+    local_path: "../brain-leaderboard"
+    branch: "main"
+    source_dir: "docs/leaderboard/"
+    target_dir: "docs/leaderboard/"
+
+  - alias: "guides"
+    repo: "BRAIN-Platform/guides"
+    local_path: "../guides"
+    branch: "main"
+    source_dir: "docs/guides/"
+    target_dir: "docs/guides/"
+

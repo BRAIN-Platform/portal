@@ -2,6 +2,7 @@
 
 [![Public Site](https://img.shields.io/badge/Public%20Site-brain.bnl.gov-blue)](https://brain.bnl.gov)
 [![Licensing: BSD-3-Clause + CC BY 4.0](https://img.shields.io/badge/Licensing-BSD--3--Clause%20%2B%20CC%20BY%204.0-orange)](LICENSING.md)
+[![Sync Portal](https://github.com/BRAIN-Platform/portal/actions/workflows/sync-from-dev.yml/badge.svg)](https://github.com/BRAIN-Platform/portal/actions/workflows/sync-from-dev.yml)
 
 
 **BRAIN (BRookhAven INference)** is Brookhaven National Laboratory's
