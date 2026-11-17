@@ -139,18 +139,22 @@ userGuides:
     label: Chat Guide
     description: Using the chat interface
     link: '{link-guides}/chat'
+  - icon: key-outline
+    label: API Key Guide
+    description: Generating and securing your API key
+    link: '{link-guides}/api-key'
   - icon: xml
     label: API Guide
-    description: Endpoints, auth, and examples
+    description: Using the OpenAI-compatible API
     link: '{link-guides}/api'
+  - icon: robot-outline
+    label: Agents
+    description: Connecting coding agents to BRAIN
+    link: '{link-guides}/agents'
   - icon: toolbox-outline
     label: Tool Guide
     # description: Word and PowerPoint generation examples
     # link: '{link-guides}/tools'
-    description: Under development
-    disabled: true
-  - icon: robot-outline
-    label: Agents
     description: Under development
     disabled: true
 leaderboard:

@@ -13,8 +13,9 @@ other conversational model-assisted tasks.
 
 This guide covers the chat interface and managing conversations, the
 prompt-box features (attachments, integrations, and model selection), writing
-effective prompts, and troubleshooting. For programmatic access or coding
-agents, see the [coding agents guide](api.md).
+effective prompts, and troubleshooting. For programmatic access, see the
+[API guide](api.md); for connecting coding assistants, see the
+[coding agents guide](agents.md).
 
 > **Access** — BRAIN is available only on the BNL network or through the BNL
 > VPN. Sign in with your Brookhaven Lab account.
@@ -36,8 +37,8 @@ agents, see the [coding agents guide](api.md).
 ## 1. Overview
 
 Go to the BRAIN landing page and select **Start Chatting** (or **Chat** in the
-top navigation), or open the [chat interface](#brain-endpoints) directly. After
-sign-in, the main BRAIN Chat window opens.
+top navigation), or open the Chat interface ([BRAIN Endpoints](#brain-endpoints))
+directly. After sign-in, the main BRAIN Chat window opens.
 
 BRAIN Chat is based on [Open WebUI](https://openwebui.com), an open-source chat
 interface, and serves the models hosted on BRAIN. Its layout and many of its
