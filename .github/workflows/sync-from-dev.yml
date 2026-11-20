@@ -39,9 +39,9 @@ on:
   repository_dispatch:
     types: [sync-portal]
 
-  schedule:
-    # Daily scan at 06:00 UTC as a fallback if manual/webhook triggers are skipped
-    - cron: "0 6 * * *"
+  # schedule:
+  #   # Daily scan at 06:00 UTC as a fallback if manual/webhook triggers are skipped
+  #   - cron: "0 6 * * *"
 
 concurrency:
   group: portal-docs-sync-${{ github.event.client_payload.component || inputs.component || 'all' }}
