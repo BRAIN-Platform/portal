@@ -10,15 +10,18 @@ models hosted on-site at Brookhaven National Laboratory. The service exposes an
 OpenAI-compatible API, which means most LLM-powered coding tools can be pointed
 at BRAIN with minimal configuration.
 
-This guide walks you through connecting three popular coding agents to BRAIN:
+This guide walks you through connecting three popular terminal-based coding
+agents to BRAIN:
 
 - **Claude Code** — Anthropic's terminal-based coding assistant
 - **OpenAI Codex CLI** — OpenAI's open-source coding agent
 - **OpenCode** — An open-source, provider-agnostic coding agent
 
 By the end of this guide each tool will route its model requests through BRAIN
-instead of its default cloud provider. For direct programmatic access (such as
-`curl` or Python scripts), see the [API guide](api.md).
+instead of its default cloud provider. To use BRAIN models inside Visual Studio
+Code's built-in Chat panel, inline chat, and Agent mode, see
+[Using BRAIN Models in VS Code Chat](vscode.md). For direct programmatic access
+(such as `curl` or Python scripts), see the [API guide](api.md).
 
 ### BRAIN endpoints
 
@@ -44,18 +47,21 @@ at runtime.
 
 ## 2. Check Available Models
 
-BRAIN exposes an OpenAI-compatible `/v1/models` endpoint. You can query it at
-any time to see which models are currently available:
+Query the OpenAI-compatible `/v1/models` endpoint to see the exact `id` values
+available to your key:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/models \
+curl -sS https://api.brain.bnl.gov/v1/models \
   -H "Authorization: Bearer $BRAIN_API_KEY" | python3 -m json.tool
 ```
 
 Use the model `id` values from the response when configuring your coding agent.
 For detailed model metadata and additional query options, see
 [Discover Available Models](api.md#3-discover-available-models) in the
-[API guide](api.md).
+[API guide](api.md). If `curl` fails with `SSL certificate problem`
+(`curl: (60)`) on an older Linux distribution or Conda environment, update your
+local CA certificates (or pass `-k` temporarily to test connectivity; see
+[Troubleshooting](#7-troubleshooting)).
 
 ---
 
@@ -329,7 +335,18 @@ under **BRAIN - Brookhaven Inference Platform**).
 
 ---
 
-## 6. Troubleshooting
+## 6. Visual Studio Code (VS Code Chat & Agent Mode)
+
+Visual Studio Code's built-in **Chat** panel, **inline chat**, and **Agent
+mode** can also connect directly to BRAIN as a custom OpenAI-compatible language
+model endpoint using your BRAIN API key.
+
+For step-by-step setup instructions and a ready-to-paste `models` JSON
+configuration, see [Using BRAIN Models in VS Code Chat](vscode.md).
+
+---
+
+## 7. Troubleshooting
 
 If a coding agent fails to connect, work through these checks in order:
 
@@ -346,13 +363,19 @@ agent.
 ### Is BRAIN reachable?
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
+curl -sS -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
   -H "Authorization: Bearer $BRAIN_API_KEY"
 ```
 
 - **200** — BRAIN is reachable and the key is valid.
 - **401 / 403** — The key is invalid or expired. Generate and configure a new
   one (see [Obtaining and Configuring a BRAIN API Key](api-key.md)).
+- **`000` with `curl: (60) SSL certificate problem`** — Your local CA bundle is
+  outdated and missing the server's root CA certificate (common on older Linux
+  distributions or Conda environments). Update your system `ca-certificates`
+  package (or point `CURL_CA_BUNDLE` / `SSL_CERT_FILE` to an updated bundle);
+  pass `-k` (`--insecure`) to `curl` only as a temporary check to confirm
+  connectivity.
 - **No response / timeout** — You are likely not on the BNL network. Connect to
   the BNL VPN and try again.
 
@@ -361,7 +384,7 @@ curl -s -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
 Model names must match exactly. List the available models:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/models \
+curl -sS https://api.brain.bnl.gov/v1/models \
   -H "Authorization: Bearer $BRAIN_API_KEY" | python3 -m json.tool
 ```
 
@@ -373,7 +396,7 @@ with a model that is.
 | Symptom | Likely Cause | Fix |
 |---|---|---|
 | Claude Code prompts for an Anthropic login | `apiKeyHelper` or `ANTHROPIC_BASE_URL` is not set | Check `~/.claude/settings.json` (or `~/.claude/settings.brain.json`) |
-| Claude Code fails with `SSL error (CERT_REJECTED)` | Client runtime rejects the server's CA certificate chain | Prefix the `claude-brain` alias with `NODE_TLS_REJECT_UNAUTHORIZED=0` (e.g., `alias claude-brain='NODE_TLS_REJECT_UNAUTHORIZED=0 claude --settings "$HOME/.claude/settings.brain.json"'`) as a **temporary workaround**, and check with the BRAIN support team on the server certificate update |
+| Claude Code fails with `SSL error (CERT_REJECTED)` | Outdated OS or runtime CA bundle missing a required root certificate | Update your system `ca-certificates` package and point Node to the updated bundle with `NODE_EXTRA_CA_CERTS` (or prefix `claude-brain` with `NODE_TLS_REJECT_UNAUTHORIZED=0` only as a **temporary workaround**). |
 | Codex says "OpenAI auth required" | `requires_openai_auth` is not `false` | Check `~/.codex/config.toml` |
 | Codex says `tool type namespace not supported` or `tool type web_search not supported` (`gpt-oss-120b`) | Model does not support namespace or web search tools | Set `web_search = "disabled"`, `[agents] enabled = false`, `[features] plugins = false`, `apps = false`, and disable MCP servers (`codex_tui`, `node_repl`, etc.) in `~/.codex/gpt-oss.config.toml` (see [Supporting Multiple Profiles (Codex)](#supporting-multiple-profiles-codex)) |
 | OpenCode shows no BRAIN models | Provider configured with V2 keys (`"providers"` / `"package"` / `"settings"`) or missing `"provider"` block | Check `~/.config/opencode/opencode.json` — OpenCode `v1.x` silently omits `"providers"`; use `"provider"`, `"npm": "@ai-sdk/openai-compatible"`, and `"options"` (with `"baseURL": "https://api.brain.bnl.gov/v1"`), then verify with `opencode models brain` |
