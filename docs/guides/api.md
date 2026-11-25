@@ -90,9 +90,14 @@ Query the OpenAI-compatible `/v1/models` endpoint to see the exact `id` values
 available to your key:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/models \
+curl -sS https://api.brain.bnl.gov/v1/models \
   -H "Authorization: Bearer $BRAIN_API_KEY" | python3 -m json.tool
 ```
+
+If `curl` fails with `SSL certificate problem` (`curl: (60)`) on an older Linux
+distribution or Conda environment, update your local CA certificates (or pass
+`-k` temporarily to test connectivity; see
+[Troubleshooting](#7-troubleshooting)).
 
 Example response structure:
 
@@ -145,7 +150,7 @@ To list metadata for all available models, call `/v1/model/info` without query
 parameters:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/model/info \
+curl -sS https://api.brain.bnl.gov/v1/model/info \
   -H "Authorization: Bearer $BRAIN_API_KEY" | python3 -m json.tool
 ```
 
@@ -160,7 +165,7 @@ To inspect a specific model by its public name from `/v1/models`, use
 `/v2/model/info` with the `model` query parameter:
 
 ```bash
-curl -s "https://api.brain.bnl.gov/v2/model/info?model=muse-glimmer-30b" \
+curl -sS "https://api.brain.bnl.gov/v2/model/info?model=muse-glimmer-30b" \
   -H "Authorization: Bearer $BRAIN_API_KEY" | python3 -m json.tool
 ```
 
@@ -174,7 +179,7 @@ Send a `POST` request to `/v1/chat/completions` with the target `model` and a
 `messages` array:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/chat/completions \
+curl -sS https://api.brain.bnl.gov/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $BRAIN_API_KEY" \
   -d '{
@@ -202,7 +207,7 @@ Set `"stream": true` and pass `-N` (`--no-buffer`) to `curl` to receive tokens
 as Server-Sent Events (SSE) as they are generated:
 
 ```bash
-curl -N -s https://api.brain.bnl.gov/v1/chat/completions \
+curl -N -sS https://api.brain.bnl.gov/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $BRAIN_API_KEY" \
   -d '{
@@ -226,7 +231,7 @@ Send text inputs to `/v1/embeddings` using the embedding model
 `nomic-embed-text`:
 
 ```bash
-curl -s https://api.brain.bnl.gov/v1/embeddings \
+curl -sS https://api.brain.bnl.gov/v1/embeddings \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $BRAIN_API_KEY" \
   -d '{
@@ -462,7 +467,7 @@ for per-model support):
 Run this one-line status check to test network access and your API key:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
+curl -sS -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
   -H "Authorization: Bearer $BRAIN_API_KEY"
 ```
 
@@ -474,6 +479,12 @@ curl -s -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
   `/v1`). Check your `base_url` configuration.
 - **400 / 422** — Invalid request payload, unsupported parameter for the
   selected model, or prompt exceeding the model's context window.
+- **`000` with `curl: (60) SSL certificate problem`** — Your local CA bundle is
+  outdated and missing the server's root CA certificate (common on older Linux
+  distributions or Conda environments). Update your system `ca-certificates`
+  package (or point `CURL_CA_BUNDLE` / `SSL_CERT_FILE` to an updated bundle);
+  pass `-k` (`--insecure`) to `curl` only as a temporary check to confirm
+  connectivity.
 - **No response / timeout** — You are likely outside the BNL network. Connect
   to the BNL VPN and try again.
 
@@ -483,6 +494,7 @@ curl -s -o /dev/null -w "%{http_code}\n" https://api.brain.bnl.gov/v1/models \
 |---|---|---|
 | `openai` SDK returns `404 Not Found` | `base_url` is missing `/v1` | Set `base_url="https://api.brain.bnl.gov/v1"` when initializing `OpenAI(...)`. |
 | `401 Unauthorized` despite exporting key | Key was exported in a different shell or contains whitespace | Verify `[ -n "$BRAIN_API_KEY" ]` in the same shell running your script (see the [API key guide](api-key.md#2-set-brain_api_key-in-your-shell)). |
+| SSL error (`CERTIFICATE_VERIFY_FAILED` or `curl: (60)`) | Outdated OS, Conda, or Python CA bundle missing a required root certificate | Update system `ca-certificates` and Python `certifi` (`pip install -U certifi`), or point `SSL_CERT_FILE` / `CURL_CA_BUNDLE` to an updated CA bundle (use `curl -k` only for temporary connectivity checks). |
 | Model not found error | Model ID changed or is misspelled | Query `GET /v1/models` and copy the exact `id` field. |
 | Image request fails | Model does not support vision inputs | Switch to a vision-capable model such as `gemma-4-26b` or `muse-glimmer-30b`. |
 | Context length exceeded | Prompt plus `max_tokens` exceeds model limit | Shorten input, lower `max_tokens`, or choose a larger-context model via `/v1/model/info`. |
